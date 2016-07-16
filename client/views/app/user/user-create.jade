@@ -1,0 +1,41 @@
+.full-content(layout="column" ng-cloak flex)
+	//div(layout='row')
+		div(layout='column' flex)
+	md-content
+		form.padded-form.center-wrapper(name="userForm")
+			img.img-banner(src="public/shared/img/banner-text.png")
+		
+			p.align-left We encourage you to be as anonymous as you would like to be on ineedtotalk.org. Feel free to use a username that has no association to your name or life. Your email will not be displayed to other users - it just adds an extra layer of security to your account. 
+				b If your device is being monitored by someone else then we recommend creating a new email address, deleting your browser history, and accessing this site in incognito mode.
+			
+			div
+				md-button.md-raised.md-primary.full-width.margin-no-horizontal(href="http://www.computerhope.com/issues/ch001378.htm" target="_blank") How to access incognito mode
+
+			md-input-container.md-icon-float.md-block
+				md-icon.icon-black(md-svg-src="public/shared/img/icons/email.svg")
+				input(required type="email" name="email" ng-model="vm.email" placeholder="Email Address" ng-pattern="/^.+@.+\..+$/")
+				div(ng-messages="userForm.email.$error" role="alert")
+					div(ng-message-exp="['required', 'pattern']") Invalid e-mail address.
+			
+			md-input-container.md-block
+				md-icon.icon-black(md-svg-src="public/shared/img/icons/person.svg")
+				input(required type="text" name="username" ng-model="vm.username" placeholder="Username" autocorrect="off" autocapitalize="none")
+				div(ng-messages="userForm.username.$error" role="alert")
+					div(ng-message="required") Please enter a username between 6 and 16 characters long.
+			
+			md-input-container.md-block
+				md-icon.icon-black(md-svg-src="public/shared/img/icons/lock.svg")
+				input(required type="password" ng-model="vm.password" placeholder="Password" autocorrect="off" autocapitalize="none")
+			
+			
+			md-input-container.md-block
+				md-icon.icon-black(md-svg-src="public/shared/img/icons/lock.svg")
+				input(required type="password" name="passwordConfirm" ng-model="vm.passwordConfirm" placeholder="Confirm Password" ng-pattern="{{vm.password}}" ng-keypress="vm.keyPressed($event)" autocorrect="off" autocapitalize="none")
+				div(ng-messages="userForm.passwordConfirm.$error" role="alert")
+					div(ng-message-exp="['required', 'pattern']") Password and password confirmation do not match.
+
+			md-nput-container.md-block 
+				md-checkbox(ng-model="vm.subscribedToNewsletter" aria-label="Subscribe?")
+					h5 I would like to subscribe to the email list of news, articles, and events.
+			md-input-container.md-block
+				md-button.full-width.md-primary.md-raised(ng-disabled="vm.email.length < 1 || vm.username.length < 1 || vm.password.length < 1 || vm.passwordConfirm.length < 1" ng-click="vm.signup($event)") Signup

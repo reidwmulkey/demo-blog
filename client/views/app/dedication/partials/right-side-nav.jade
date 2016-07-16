@@ -1,0 +1,12 @@
+md-sidenav.md-sidenav-right.md-whiteframe-z2(layout='column' md-component-id='right' style="overflow-x:hidden;")
+	//-(ng-style="{'background-image': 'url(\"{{vm.selectedSupportGroup.photo}}\")'}")
+	md-toolbar.md-tall.message-list-nav-banner
+		//-div.md-toolbar-tools.inset
+			h1.sidenav-header Messages
+	//md-subheader Search
+	.padding-standard
+		br
+		md-input-container.md-icon-float.md-icon-right.md-block
+			input(ng-model="vm.searchText" placeholder="Name, Description..." flex ng-keypress="vm.keyPressed($event)")
+			//md-button.full-width.icon-black(ng-click="vm.search()") Search
+			md-icon(ng-click="vm.search()" md-svg-src="public/shared/img/icons/search.svg")

@@ -1,0 +1,41 @@
+include ../../mixins/toolbar.jade
+
+.full-content(layout="column" ng-cloak flex)
+	+toolbar('Contact & Credits')
+	div(layout='row')
+		div(layout='column')
+			include ../../partials/left-side-nav.jade
+		div(layout='column' flex)
+			md-content.padding-standard
+				h1 Contact
+				p ineedtotalk.org is a registered 501.c.3 non-profit organization. We are based out of Fort Worth, Texas. The board of directors is:
+				table.contact-table
+					th Name
+					th Role
+					th Email
+				
+					tr
+						td Reid Mulkey
+						td President, Secretary
+						td reid@ineedtotalk.org
+					tr
+						td Charlie Thompson
+						td Vice President
+						td charlie@ineedtotalk.org
+					tr
+						td Cindy Mulkey
+						td Treasurer
+						td -
+
+				p If you have any questions about using the site or experience any technical difficulties, please email&nbsp;
+					b
+						a(href="mailto:support@ineedtotalk.org" type="email") support@ineedtotalk.org
+					span .
+
+				p This site is still relatively new, so there are probably a few kinks that need to be worked out. If you find any bugs, please email&nbsp;
+					b
+						a(href="mailto:development@ineedtotalk.org" type="email") development@ineedtotalk.org
+					span &nbsp;with what page you were on, what device you were using, and a short description of the bug.
+				br
+				h1 Credits
+				p This site uses several images and resources released under creative commons, which require attributions. The following web addresses are where the source materials were retrieved.

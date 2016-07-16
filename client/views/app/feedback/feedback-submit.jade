@@ -1,0 +1,89 @@
+include ../../mixins/toolbar.jade
+
+.full-content(style="display: block;")
+	+toolbar("Send Feedback")
+	div(layout='row')
+		include ../../partials/left-side-nav.jade
+		
+		div(layout="column")
+			div.content-holder
+				md-content.content
+					div.padding-standard
+						h2.feedback-header Features
+						p I believe the best way to grow ineedtotalk.org is from the feedback of those who use it. I have a lot of features I want to add, but I only have so much time and bandwidth. I have listed a few of these features below. Please select the likelihood you would make use of these features.
+						md-divider 
+
+						p(ng-show="vm.features.length === 0") There are no features that need feedback at this time.
+						div(ng-repeat="feature in vm.features")
+							div(layout="row")
+								h3 {{feature.description}}
+								md-button.md-icon-button(ng-show="feature.info && feature.info.length > 0" aria-label="info" style="margin-top:9px;" ng-click="vm.showInfo(feature, $event)")
+									md-icon.icon-primary(aria-label="More information" md-svg-src="public/shared/img/icons/info-outline.svg")
+							md-radio-group(ng-model="feature.vote")
+								md-radio-button(value="-2") Very Unlikely
+								md-radio-button(value="-1") Unlikely
+								md-radio-button(value="0") Undecided
+								md-radio-button(value="1") Likely
+								md-radio-button(value="2") Very Likely
+						md-divider 
+
+						h2.feedback-header Comments
+
+						h4 Are there any additional features you would like to see on ineedtotalk.org?
+						md-input-container.md-block
+							textarea(placeholder="Additional features..." ng-model="vm.additionalFeatures" flex)
+
+						h4 Are there any other support groups that you think should be on ineedtotalk.org?
+						md-input-container.md-block
+							textarea(placeholder="Additional support groups..." ng-model="vm.additionalSupportGroups" flex)
+
+						h4 Do you have any additional comments you would like to make?
+						md-input-container.md-block
+							textarea(placeholder="Additional comments..." ng-model="vm.comment" flex)
+
+						md-button.full-width.md-primary.md-raised(ng-click="vm.sendFeedback()") Send Feedback
+						br
+						br
+						br
+						br
+						br
+//-include ../../mixins/toolbar.jade
+	md-content.full-content(layout="column" ng-cloak flex)
+		+toolbar("Send Feedback")
+		md-content(layout='row')
+			div(layout='column')
+				include ../../partials/left-side-nav.jade
+			#content.padding-standard(layout='column' flex)
+				h2.feedback-header Features
+				p I believe the best way to grow ineedtotalk.org is from the feedback of those who use it. I have a lot of features I want to add, but I only have so much time and bandwidth. I have listed a few of these features below. Please select the likelihood you would make use of these features.
+				md-divider 
+
+				p(ng-show="vm.features.length === 0") There are no features that need feedback at this time.
+				div(ng-repeat="feature in vm.features")
+					div(layout="row")
+						h3 {{feature.description}}
+						md-button.md-icon-button(ng-show="feature.info && feature.info.length > 0" aria-label="info" style="margin-top:9px;" ng-click="vm.showInfo(feature, $event)")
+							md-icon.icon-primary(aria-label="More information" md-svg-src="public/shared/img/icons/info-outline.svg")
+					md-radio-group
+						md-radio-button(ng-model="color" value="-2" aria-label="Very Unlikely") Very Unlikely
+						md-radio-button(ng-model="color" value="-1" aria-label="Unlikely") Unlikely
+						md-radio-button(ng-model="color" value="0" aria-label="Undecided") Undecided
+						md-radio-button(ng-model="color" value="1" aria-label="Likely") Likely
+						md-radio-button(ng-model="color" value="2" aria-label="Very Likely") Very Likely
+				md-divider 
+
+				h2.feedback-header Comments
+
+				h4 Are there any additional features you would like to see on ineedtotalk.org?
+				md-input-container.md-block
+					textarea(placeholder="Additional features..." ng-model="vm.additionalFeatures" flex)
+
+				h4 Are there any other support groups that you think should be on ineedtotalk.org?
+				md-input-container.md-block
+					textarea(placeholder="Additional support groups..." ng-model="vm.supportGroups" flex)
+
+				h4 Do you have any additional comments you would like to make?
+				md-input-container.md-block
+					textarea(placeholder="Additional comments..." ng-model="vm.comment" flex)
+
+				md-button.md-primary.md-raised(ng-click="vm.sendFeedback()") Send Feedback

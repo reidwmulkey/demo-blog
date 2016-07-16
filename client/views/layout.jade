@@ -1,0 +1,94 @@
+doctype html
+html(ng-app="wooted" ng-csp)
+	head
+		base(href='/')
+		meta(charset='utf8')
+		title(update-title) wooted! history of all deals from woot.com
+		
+		//-mobile site configuration
+		link(rel="apple-touch-icon-precomposed" href="public/shared/img/logo.png")
+		meta(name="apple-mobile-web-app-capable" content="yes")
+		meta(name="apple-mobile-web-app-status-bar-style" content="default")
+		meta(name="viewport" content = "width = device-width, initial-scale = 1.0, user-scalable = no")
+
+		link(rel='stylesheet', href='public/client/css/app.css')
+		link(rel='stylesheet', href='/lib/angular/angular-csp.css')
+		link(rel='stylesheet', href='/lib/angular-material/angular-material.min.css')
+	body(ng-controller="app-control as rvm")
+		ui-view(style="overflow:hidden;")
+
+		script(src='/lib/angular/angular.js')
+		script(src='/lib/angular-ui-router/release/angular-ui-router.min.js')
+		
+		script(src='/lib/angular-animate/angular-animate.js')
+		script(src='/lib/angular-aria/angular-aria.js')
+		script(src='/lib/angular-material/angular-material.js')
+		
+		script(src='/public/client/app/app.module.js')
+		script(src='/public/client/app/app.filters.js')
+		script(src='/public/client/app/app.directives.js')
+		script(src='/public/client/app/app.controller.js')
+
+		//-services
+		script(src='/public/client/app/services/services.module.js')
+		script(src='/public/client/app/services/communication.service.js')
+		script(src='/public/client/app/services/sidenav-left.service.js')
+		
+		//-factories
+		script(src='/public/client/app/factories/factories.module.js')
+		script(src='/public/client/app/factories/config.factory.js')
+
+		//-Individual Controllers
+		//-donate
+		script(src='/public/client/app/components/donate/donate.module.js')
+		script(src='/public/client/app/components/donate/donate.service.js')
+		script(src='/public/client/app/components/donate/donate-detail.controller.js')
+
+		//-dedication
+		script(src='/public/client/app/components/dedication/dedication.module.js')
+		script(src='/public/client/app/components/dedication/dedication.service.js')
+		script(src='/public/client/app/components/dedication/dedication-create.controller.js')
+		script(src='/public/client/app/components/dedication/dedication-detail.controller.js')
+		script(src='/public/client/app/components/dedication/dedication-list.controller.js')
+
+		//-error
+		script(src='/public/client/app/components/error/error.module.js')
+		script(src='/public/client/app/components/error/error-404.controller.js')
+
+		//-feedback
+		script(src='/public/client/app/components/feedback/feedback.module.js')
+		script(src='/public/client/app/components/feedback/feedback.service.js')
+		script(src='/public/client/app/components/feedback/feedback-submit.controller.js')
+
+		//-information
+		script(src='/public/client/app/components/information/information.module.js')
+		script(src='/public/client/app/components/information/about.controller.js')
+		script(src='/public/client/app/components/information/contact.controller.js')
+
+		//-message
+		script(src='/public/client/app/components/message/message.module.js')
+		script(src='/public/client/app/components/message/message.service.js')
+		script(src='/public/client/app/components/message/message-list.controller.js')
+		script(src='/public/client/app/components/message/message-guidelines.controller.js')
+
+		//-support-group
+		script(src='/public/client/app/components/support-group/support-group.module.js')
+		script(src='/public/client/app/components/support-group/support-group.service.js')
+		script(src='/public/client/app/components/support-group/support-group-list.controller.js')
+		script(src='/public/client/app/components/support-group/support-group-detail.controller.js')
+
+		//-user
+		script(src='/public/client/app/components/user/user.module.js')
+		script(src='/public/client/app/components/user/user.service.js')
+		script(src='/public/client/app/components/user/user.routes.js')
+		script(src='/public/client/app/components/user/user-agreement.controller.js')
+		script(src='/public/client/app/components/user/user-create.controller.js')
+		script(src='/public/client/app/components/user/user-detail.controller.js')
+		script(src='/public/client/app/components/user/user-edit.controller.js')
+		script(src='/public/client/app/components/user/user-login.controller.js')
+		script(src='/public/client/app/components/user/user-verify.controller.js')
+
+		script(src='/public/client/app/index.controller.js')
+
+		//-End Individual Controllers
+		script(src='/public/client/app/i-need-to-talk.js')

@@ -5,35 +5,47 @@ var idValidator = require('mongoose-id-validator');
 var Schema = mongoose.Schema;
 
 var schema = new Schema({
-	name: {
+	site: {
 		type: String,
+		required: true
+	},
+	item: {
+		type: Schema.ObjectId,
+		required: true
+	},
+	price: {
+		type: String,
+		required: true
+	},
+	date: {
+		type: Date,
 		required: true,
 		unique: true,
-		dropDups: true
-	},
-	image: String
+		dropDupes: true
+	}
 });
 
 schema.plugin(idValidator);
 
-schema.statics.getByNameOrCreate = function(name, image){
-	return this.findOneAndUpdateQ({name: name}, {
-		name: name,
-		image: image
-	},{
-		new: true,
-		upsert: true
-	});
-}
-
 schema.statics.getById = function(wootId){
 	return this.findOneQ({_id: wootId});
+}
+
+schema.statics.getByItemId = function(itemId){
+	return this.findQ({item: itemId});
 }
 
 schema.statics.getAll = function(){
 	return this.findQ();
 }
 
-var model = mongoose.model('Woot', schema);
+schema.statics.create = function(data){
+	var now = new Date();
+	if(data) data.date = now;
+	var instance = new this(data);
+	return instance.saveQ();
+}
+
+var model = mongoose.model('Instance', schema);
 
 module.exports = model;

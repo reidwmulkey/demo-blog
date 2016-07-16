@@ -1,0 +1,30 @@
+include ../../mixins/toolbar.jade
+
+.full-content(layout="column" ng-cloak flex)
+	+toolbar("{{vm.user.username}}")
+	div(layout='row')
+		div(layout='column')
+			include ../../partials/left-side-nav.jade
+		div(layout='column' flex)
+			md-content
+				br
+				br
+				form.padded-form.center-wrapper(name="loginForm")
+					img.img-banner(src="public/shared/img/banner-text.png")
+					
+					md-input-container.md-icon-float.md-block
+						md-icon.icon-black(md-svg-src="public/shared/img/icons/person.svg")
+						input(tabindex="1" required type="text" autocorrect="off" autocapitalize="none" ng-model="vm.username" placeholder="Username")
+					
+					md-input-container.md-icon-float.md-block
+						md-icon.icon-black(md-svg-src="public/shared/img/icons/lock.svg")
+						input(tabindex="2" required type="password" name="password" ng-model="vm.password" placeholder="Password" ng-keypress="vm.keyPressed($event)")
+						div(ng-messages="loginForm.password.$error" role="alert")
+							div(ng-message-exp="['required']") Incorrect username and password combination.
+					md-input-container.md-block
+						md-button.md-raised.md-primary.full-width(ng-disabled="vm.username.length < 1 || vm.password.length < 1" ng-click="vm.login()") Login
+
+						md-button.md-raised.md-primary.full-width(ui-sref="user-create") Create an account
+
+				div.center-wrapper
+					md-button.md-accent(ng-click="vm.showForgotPassword()") Forgot Password?

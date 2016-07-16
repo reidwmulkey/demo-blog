@@ -1,0 +1,10 @@
+mixin toolbar(title, action, icon)
+	md-toolbar(layout='row')&attributes(attributes)
+		//erry body in the toolbar gettin tipsy
+		.md-toolbar-tools
+			md-button.md-icon-button(ng-click="vm.sidenavLeft.toggle()" aria-label="Open/Close main menu")
+				md-icon.icon-white(md-svg-icon="public/shared/img/icons/hamburger.svg")
+			h1= title
+			span(flex)
+			md-button(class="md-icon-button" ng-click=action aria-label="Open/Close secondary menu")
+				md-icon.icon-white(md-svg-icon=icon)

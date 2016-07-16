@@ -1,0 +1,64 @@
+include ../../mixins/toolbar.jade
+
+.full-content(layout="column" ng-cloak flex)
+	+toolbar("{{vm.selectedSupportGroup.name}}", "vm.sidenavRightButtonClicked()", "public/shared/img/icons/chat.svg")(watch-height="vm.toolbarHeight")
+	div(layout='row')
+
+		div(layout='column')
+			include ../../partials/left-side-nav.jade
+		
+		//-messages
+		div(layout="column" flex)
+			.dc-overlay(ng-class="{'opacity-full': vm.isConnected === false, 'opacity-none': vm.isConnected === true}")
+				.dc-center-wrapper
+					.dc-holder
+						md-icon.icon-dc(md-svg-src="public/shared/img/icons/disconnect.svg")
+						p Could not connect to the messaging server.
+
+
+			md-content.content-holder(ng-class="{'opacity-full': vm.isConnected === true, 'opacity-tenth': vm.isConnected === false}")
+				.padding-standard(ng-show="vm.user.supportGroups.length === 0") 
+					p You have not joined any support groups. You can use the menu to the left to join a support group, or click the button below.
+					md-button.md-raised.no-margin(ui-sref="support-group-list") Go to support groups
+
+				p.padding-standard(ng-show="vm.user.supportGroups.length !== 0 && vm.selectedMessages.length === 0") No messages to display.
+				
+				md-list#message-list(is-scrolled-bottom="vm.isScrolledBottom" ng-style="{height: vm.messageListHeight}")
+
+					md-list-item(ng-repeat="message in vm.selectedMessages | limitTo: -50" ng-hide="vm.user.blockedUsers.indexOf(message.sender._id) !== -1")
+						div(ng-show="message.sender._id === vm.user._id" flex="15")
+						.shadow.no-animate(flex="80" ng-class="{'chat-bubble-received': message.sender._id !== vm.user._id, 'chat-bubble-sent': message.sender._id === vm.user._id}")
+							.chat-banner(layout="row")
+								img.md-avatar.shadow.raise.margin-left-sm(avatar-src="{{message.sender.avatar}}" ng-click="vm.goToProfile(message.sender)" style="margin-top: 5px; margin-bottom: 0px;")
+								b.chat-name {{message.sender.username}}	
+								md-icon.margin-left-sm.icon-white.chat-options(ng-show="message.sender._id !== vm.user._id" ng-click="vm.userOptions(message.sender, $event)" aria-label="User options" md-svg-src="public/shared/img/icons/arrow-down.svg")
+							p.chat-message(style="overflow:auto;") {{message.body}}
+						div(ng-show="message.sender._id !== vm.user._id" flex="15")
+
+
+					//md-list-item(ng-repeat="message in vm.selectedMessages | limitTo: 50" ng-hide="vm.user.blockedUsers.indexOf(message.sender._id) !== -1")
+						div(ng-show="message.sender._id === vm.user._id" flex="15")
+						md-card(flex="80")
+							div(layout="row")
+								img.md-avatar.shadow.raise.margin-left-sm(avatar-src="{{message.sender.avatar}}" ng-click="vm.goToProfile(message.sender)")
+								h3 {{message.sender.username}}	
+								md-icon.margin-left-sm(ng-show="message.sender._id !== vm.user._id" ng-click="vm.userOptions(message.sender, $event)" aria-label="User options" md-svg-src="public/shared/img/icons/arrow-down.svg")
+							p(style="overflow:auto;") {{message.body}}
+						div(ng-show="message.sender._id !== vm.user._id" flex="15")
+
+					#bottom.md-list-item
+
+				//-md-bottom-sheet
+
+				#message-box(watch-height="vm.messageBoxHeight")
+					//-.center-wrapper.dc-bg(ng-show="!vm.isConnected")
+						md-icon.icon-dc(md-svg-src="public/shared/img/icons/disconnect.svg")
+
+					//md-input-container.md-icon-float.md-icon-right.md-block(ng-show="vm.isConnected")
+					md-input-container.md-icon-float.md-icon-right.md-block
+						textarea(placeholder="Message" ng-disabled="vm.user.supportGroups.length === 0 || vm.isConnected === false" ng-model="vm.message" ng-keypress="vm.keyPressed($event)" flex style="overflow-y: auto;")
+						md-icon.icon-primary(md-svg-src="public/shared/img/icons/send.svg" ng-click="vm.sendMessage()")
+
+		//-right side nav
+		div(layout='column')
+			include ./partials/right-side-nav.jade

@@ -1,0 +1,19 @@
+md-dialog(aria-label="Thank you for signing up")
+	form(name="infoForm")
+		md-toolbar
+			.md-toolbar-tools
+				h2 Thank you
+				span(flex)
+				md-button.md-icon-button(ng-click="cancel()")
+					md-icon.icon-white(md-svg-src="public/shared/img/icons/close.svg" aria-label="Close dialog")
+
+		md-dialog-content
+			p In order to start using your account, you will need to verify your email address. A verification email has been sent to your email address:
+			p.center-wrapper
+				b {{email}}
+			br
+			p Please follow the instructions in order to finish your account setup.
+		
+		md-dialog-actions(layout="row")
+			span(flex)
+			md-button.md-primary.md-raised(ng-click="okay()") Okay

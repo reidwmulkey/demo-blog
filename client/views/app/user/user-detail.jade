@@ -1,0 +1,33 @@
+include ../../mixins/toolbar.jade
+
+.full-content(layout="column" ng-cloak flex)
+	+toolbar("View Profile")
+	div(layout='row')
+		div(layout='column')
+			include ../../partials/left-side-nav.jade
+		div(layout='column' flex)
+			md-content
+				//div(cover-src="{{vm.user.cover}}")
+				//.user-card.shadow(layout="row")
+					//div.avatar-wrapper(flex="33")
+						img.md-avatar(avatar-src="{{vm.user.avatar}}")
+				//-div(flex="66")
+					.padding-standard
+						h5 Username
+						p {{vm.user.username}}
+						//md-input-container.md-block
+							md-icon.icon-black(md-svg-src="public/shared/img/icons/person.svg")
+							input(type="text" ng-model="vm.user.username" placeholder="Username" ng-disabled="true")
+
+						//md-input-container.md-block
+							md-icon.icon-black(md-svg-src="public/shared/img/icons/date.svg")
+							input(type="datetime" placeholder="Created on" ng-disabled="true"  value ="{{vm.user.timeCreated | date:\"MM/dd/yyyy 'at' h:mma\"}}")
+
+				//div(style="background-image:url('/public/shared/img/cover.png'); background-repeat: round; height: 200px;")
+				div(aspect-ratio ratio="32:9" min-height="150px" max-height="300px" style="background-image:url('/public/shared/img/cover.png'); background-repeat: round;")
+				.header-block
+					img.md-avatar.shadow.raise(avatar-src="{{vm.user.avatar}}")
+					h3.white {{vm.user.username}}
+
+				p(ng-show="!vm.user.profile || vm.user.profile.length <= 0") This user has not added a profile.
+				p.padding-standard(ng-bind-html="vm.user.profile | html")

@@ -1,0 +1,8 @@
+mixin settings(op, pageTitle)
+	- 
+		if(op === 'get')
+			return savedTitle
+		else if(op === 'set')
+			savedTitle= pageTitle
+		p(style="display:none;") #{savedTitle}
+
