@@ -3,8 +3,20 @@
 md-sidenav.md-sidenav-left.md-whiteframe-z2(layout='column' md-component-id='left')
 	md-toolbar.md-tall.bg-white.less-tall
 		div.md-toolbar-tools.inset 
-			//img.img-banner.margin-top-md(src="public/shared/img/banner-teal.png")
-			h1.sidenav-header wooted
+			h1.sidenav-header Item search
 	//-md-subheader Channels
 	md-content
-		test
+		.padding-standard
+			md-input-container.md-icon-float.md-block
+				md-icon.icon-black(md-svg-src="assets/shared/img/icons/person.svg")
+				input(tabindex="1" type="text" autocorrect="off" autocapitalize="none" ng-model="vm.itemName" placeholder="Item name")
+
+			md-checkbox(ng-model="vm.searchSpecificSites" aria-label="search specific sites")
+				p Search specific sites
+			
+			div(ng-repeat="site in vm.availableSites")
+				md-checkbox(ng-show="vm.searchSpecificSites" value="{{site.name}}" ng-click="vm.selectSite(site)")
+					p {{site.name}}
+				br
+
+			md-button.md-raised.md-accent(ng-click="vm.search()") Search

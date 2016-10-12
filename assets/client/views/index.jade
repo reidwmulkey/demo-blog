@@ -44,6 +44,8 @@ html(ng-app="wooted" ng-csp ng-controller="app-control as rvm")
 		
 	body
 		ui-view(style="overflow:hidden;")
+		#load-container
+			md-progress-circular.md-accent(ng-show="true" md-diameter="40")
 
 		script(src='/assets/client/js/lib.js')
 		script(src='/assets/client/js/app.js')

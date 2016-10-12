@@ -19,8 +19,16 @@ include ../mixins/toolbar.jade
 					p Is there something you want to buy, but not <span class="secondary">too</span> bad? Have you tried looking around to find the lowest deal?
 
 					p I ran into this issue when I need to buy a new phone. I got $400 nexus 5 from <a class="secondary" href="http://woot.com/">woot.com</a> just $75, but I cracked the screen. I wanted to get an iPhone so I could get an otterbox, but I wasn't sure when iPhone's were last sold on woot, and I didn't know if I'd even save money by waiting for the next sale. 
-				//p(ng-show="vm.items.length === 0") No items found.
-				//md-table-container(ng-show="vm.items.length > 0")
+				p(ng-show="vm.items.length === 0") No items found.
+				md-list#item-list(ng-show="vm.items.length > 0")
+					md-list-item.md-2-line(ng-click="vm.selectItem(item)" ng-repeat="item in vm.items")
+						img(bind-src="{{item.image}}")
+						.md-list-item-text
+							p.padding-standard {{item.name}}
+						//<p>Secondary text</p>
+						md-divider
+
+				//-md-table-container(ng-show="vm.items.length > 0")
 					table(md-table md-row-select multiple ng-model="vm.items" md-progress="promise")
 						thead(md-head md-order="query.order" md-on-reorder="getDesserts")
 							tr(md-row)
@@ -43,4 +51,4 @@ include ../mixins/toolbar.jade
 
 								.md-divider
 
-				//md-table-pagination(md-limit="query.limit" md-limit-options="[5, 10, 15]" md-page="query.page" md-total="{{desserts.count}}" md-on-paginate="getDesserts" md-page-select)
+				//-md-table-pagination(md-limit="query.limit" md-limit-options="[5, 10, 15]" md-page="query.page" md-total="{{desserts.count}}" md-on-paginate="getDesserts" md-page-select)

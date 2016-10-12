@@ -9,8 +9,16 @@
 			return Communication.get('api/items');
 		}
 
+		function search(itemName, selectedSites){
+			return Communication.get('api/items', {
+				itemName: itemName,
+				selectedSites: selectedSites
+			})
+		}
+
 		return {
-			getAllWoots: getAllWoots
+			getAllWoots: getAllWoots,
+			search: search
 		};
 	}
 })();

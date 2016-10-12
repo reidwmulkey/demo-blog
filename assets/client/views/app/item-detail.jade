@@ -1,0 +1,18 @@
+md-dialog(aria-label="Item details")
+	md-toolbar
+		.md-toolbar-tools
+			h2 Item Details
+			span(flex)
+			md-button.md-icon-button(ng-click="close()")
+				ng-md-icon(icon="close")
+
+	md-dialog-content
+		.padding-standard
+			img(bind-src="{{item.image}}")			
+			h3.secondary {{item.name}}
+			md-divider
+			p test
+
+	md-dialog-actions(layout="row")
+		span(flex)
+		md-button.md-primary.md-raised(ng-click="close()") Close			

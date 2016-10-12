@@ -2,9 +2,9 @@
 	'use strict';
 
 	angular.module('services')
-	.service('sidenavLeft', ['$mdSidenav', '$mdComponentRegistry', '$state', SidenavLeftService]);
+	.service('SearchMenu', ['$mdSidenav', '$mdComponentRegistry', '$state', SearchMenu]);
 
-	function SidenavLeftService($mdSidenav, $mdComponentRegistry, $state){
+	function SearchMenu($mdSidenav, $mdComponentRegistry, $state){
 		function toggle(){
 			if($mdComponentRegistry.get('right') && $mdSidenav('right').isOpen() && !$mdSidenav('left').isOpen()){
 				$mdSidenav('right').close()
@@ -18,7 +18,7 @@
 		}
 
 		return {
-
+			toggle: toggle
 		};
 	}
 })();

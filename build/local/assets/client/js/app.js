@@ -36,9 +36,9 @@
 	'use strict';
 
 	angular.module('services')
-	.service('Communication', ['$http', '$q', '$state', 'Config', CommunicationService]);
+	.service('Communication', ['$http', '$q', '$state', 'Config', 'Load', CommunicationService]);
 
-	function CommunicationService($http, $q, $state, Config){
+	function CommunicationService($http, $q, $state, Config, Load){
 		function common(path, method, queryParams, body){
 			var deferred = $q.defer();
 			var headers = {'Content-Type': 'application/json'};
@@ -52,13 +52,15 @@
 			
 			if((method != 'GET') && body)
 				req.data = body;
+			Load.startLoading();
 
 			$http(req).then(function(resp){
 				deferred.resolve(resp.data);
 			})
 			.catch(function(error){
 				deferred.reject(error);
-			});
+			})
+			.finally(Load.stopLoading);
 			return deferred.promise;
 		}
 
@@ -80,9 +82,34 @@
 	'use strict';
 
 	angular.module('services')
-	.service('sidenavLeft', ['$mdSidenav', '$mdComponentRegistry', '$state', SidenavLeftService]);
+	.service('Load', [LoadService]);
 
-	function SidenavLeftService($mdSidenav, $mdComponentRegistry, $state){
+	function LoadService(){
+		function startLoading(){
+			document.getElementById('load-container').style.display = "block";
+		}	
+		function stopLoading(){
+			document.getElementById('load-container').style.display = "none";
+		}
+
+		function isLoading(){
+			return window.getComputedStyle(document.getElementById('load-container')).getPropertyValue('display') === 'block';
+		}
+
+		return {
+			startLoading: startLoading,
+			stopLoading: stopLoading
+		};
+	}
+})();
+
+(function(){
+	'use strict';
+
+	angular.module('services')
+	.service('SearchMenu', ['$mdSidenav', '$mdComponentRegistry', '$state', SearchMenu]);
+
+	function SearchMenu($mdSidenav, $mdComponentRegistry, $state){
 		function toggle(){
 			if($mdComponentRegistry.get('right') && $mdSidenav('right').isOpen() && !$mdSidenav('left').isOpen()){
 				$mdSidenav('right').close()
@@ -96,7 +123,7 @@
 		}
 
 		return {
-
+			toggle: toggle
 		};
 	}
 })();
@@ -112,8 +139,16 @@
 			return Communication.get('api/items');
 		}
 
+		function search(itemName, selectedSites){
+			return Communication.get('api/items', {
+				itemName: itemName,
+				selectedSites: selectedSites
+			})
+		}
+
 		return {
-			getAllWoots: getAllWoots
+			getAllWoots: getAllWoots,
+			search: search
 		};
 	}
 })();
@@ -493,17 +528,81 @@ angular.module('app')
 	function appController(SearchMenu){
 		var rvm = this;
 		rvm.SearchMenu = SearchMenu;
+		/*rvm.isLoading = false;
+
+		rvm.startLoading = function(){
+			rvm.isLoading = true;
+		}
+
+		rvm.stopLoading = function(){
+			rvm.isLoading = false;
+		}*/
 	}
 })();
 (function(){
 	'use strict';
 
 	angular.module('app')
-	.controller('index-ctrl', ['$state', '$scope', 'Wooted', indexCtrl]);
+	.controller('index-ctrl', ['$state', '$scope', '$mdDialog', 'Wooted', 'SearchMenu', indexCtrl]);
 
-	function indexCtrl($state, $scope, Wooted){
+	function indexCtrl($state, $scope, $mdDialog, Wooted, SearchMenu){
 		var vm = this;
 		vm.items;
+		vm.selectSpecificSites = false;
+		vm.availableSites = [
+			{ name:'woot', url:'http://www.woot.com' }, 
+			{ name:'electronics', url:'http://electronics.woot.com' }, 
+			{ name:'home', url:'http://home.woot.com' }, 
+			{ name:'tools & garden', url:'http://tools.woot.com' }, 
+			{ name:'sport', url:'http://sport.woot.com' }, 
+			{ name:'accessories & watches', url:'http://accessories.woot.com' }, 
+			{ name:'wine', url:'http://wine.woot.com' }
+		];
+		vm.selectedSites = [];
+		vm.itemName = '';
+
+		vm.selectSite = function(site) {
+			var index = vm.selectedSites.indexOf(site.name);
+		    if(index > -1) 
+		      vm.selectedSites.splice(index, 1);
+		    else 
+		      vm.selectedSites.push(site.name);
+		}
+
+		vm.search = function(){
+			Wooted.search(vm.itemName, vm.selectedSites.length > 0 ? vm.selectedSites : null)
+			.then(function(items){
+				vm.items = items;
+				SearchMenu.toggle();
+				console.log(vm.items);
+			})
+			.catch(function(error){
+				$mdToast.show($mdToast.simple().textContent(error.data));
+			})
+		}
+
+		vm.selectItem = function(item){
+			$mdDialog.show({
+				controller: ['$scope', '$mdDialog', 'Wooted', ItemDetailCtrl],
+				templateUrl: '/assets/client/views/app/item-detail.html',
+				parent: angular.element(document.body),
+				// targetEvent: event,
+				clickOutsideToClose:true,
+				fullscreen: false,
+				locals: {
+					item: item
+				}
+			})
+
+			function ItemDetailCtrl($scope, $mdDialog, Wooted){
+				$scope.item = item;
+				console.log($scope.item);
+
+				$scope.close = function(){
+					$mdDialog.hide();
+				}
+			}
+		}
 
 		console.log('loaded index.controller.js');
 		// Wooted.getAllWoots()
