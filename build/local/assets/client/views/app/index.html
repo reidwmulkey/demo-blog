@@ -1,1 +1,22 @@
-<div layout="column" ng-cloak="ng-cloak" flex="flex" class="full-content"><md-toolbar layout="row"><!--erry body in the toolbar gettin tipsy--><div class="md-toolbar-tools"><md-button ng-click="vm.sidenavLeft.toggle()" aria-label="Open/Close main menu" class="md-icon-button"><ng-md-icon icon="menu"></ng-md-icon><!--md-icon.icon-white(md-svg-icon="public/shared/img/icons/hamburger.svg")--></md-button><h1>wooted</h1><span flex="flex"></span><md-button ng-show="icon" aria-label="Search" class="md-icon-button"><ng-md-icon></ng-md-icon></md-button><!--md-button(class="md-icon-button" ng-click=action aria-label="Open/Close secondary menu")md-icon.icon-white(md-svg-icon=icon)--></div></md-toolbar><div layout="row"><!--div(layout='column')include ../partials/left-side-nav.jade--><div layout="column" flex="flex"><md-content><p ng-show="vm.items.length === 0">No items found.</p><md-table-container ng-show="vm.items.length &gt; 0"><table md-table="md-table" md-row-select="md-row-select" multiple="multiple" ng-model="vm.items" md-progress="promise"><thead md-head="md-head" md-order="query.order" md-on-reorder="getDesserts"><tr md-row="md-row"><th md-column="md-column">Photo</th><th md-column="md-column">Item name</th><th md-column="md-column">Times sold</th><th md-column="md-column">Last date sold</th><th md-column="md-column">Avg. price</th></tr><div class="md-divider"></div></thead><tbody md-body="md-body"><tr md-row="md-row" md-select="dessert" md-select-id="name" md-auto-select="md-auto-select" ng-repeat="item in vm.items"><td md-cell="md-cell"> <img bind-src="{{item.image}}"/></td><td md-cell="md-cell">{{item.name}}</td><td md-cell="md-cell">{{item.timesSold}}</td><td md-cell="md-cell">{{item.LastTimeSold}}</td><td md-cell="md-cell">{{item.avgPrice}}</td><div class="md-divider"></div></tr></tbody></table></md-table-container><!--md-table-pagination(md-limit="query.limit" md-limit-options="[5, 10, 15]" md-page="query.page" md-total="{{desserts.count}}" md-on-paginate="getDesserts" md-page-select)--></md-content></div></div></div>
+<div layout="column" ng-cloak="ng-cloak" flex="flex" class="full-content"><md-toolbar layout="row"><!--erry body in the toolbar gettin tipsy--><div class="md-toolbar-tools"><md-button ng-click="rvm.SearchMenu.toggle()" aria-label="Open/Close search menu" class="md-icon-button"><ng-md-icon icon="search"></ng-md-icon></md-button><h1>wooted</h1><span flex="flex"></span></div></md-toolbar><div layout="row"><div layout="column"><!--ng-init="vm.sidenavLeft.setState()"--><!--, md-is-locked-open="vm.sidenavLeftOpen"--><md-sidenav layout="column" md-component-id="left" class="md-sidenav-left md-whiteframe-z2"><md-toolbar class="md-tall bg-white less-tall"><div class="md-toolbar-tools inset"> <!--img.img-banner.margin-top-md(src="public/shared/img/banner-teal.png")--><h1 class="sidenav-header">wooted</h1></div></md-toolbar><md-content><test></test></md-content></md-sidenav></div><div layout="column" flex="flex"><md-content><div ng-show="!vm.items"><br/><img src="/assets/client/img/woot.svg" class="index-banner"/><h3 class="secondary center">The archives of all previous woot sales</h3><md-divider></md-divider><br/><div class="padding-standard">Use the menu to the left to search all the items sold on woot so you know when to get the best deals.</div></div><!--p(ng-show="vm.items.length === 0") No items found.--><!--md-table-container(ng-show="vm.items.length > 0")table(md-table md-row-select multiple ng-model="vm.items" md-progress="promise")
+	thead(md-head md-order="query.order" md-on-reorder="getDesserts")
+		tr(md-row)
+			th(md-column) Photo
+			th(md-column) Item name
+			th(md-column) Times sold
+			th(md-column) Last date sold
+			th(md-column) Avg. price
+	
+		.md-divider
+
+	tbody(md-body)
+		tr(md-row md-select="dessert" md-select-id="name" md-auto-select ng-repeat="item in vm.items")
+			td(md-cell) 
+				img(bind-src="{{item.image}}")
+			td(md-cell) {{item.name}}
+			td(md-cell) {{item.timesSold}}
+			td(md-cell) {{item.LastTimeSold}}
+			td(md-cell) {{item.avgPrice}}
+
+			.md-divider
+--><!--md-table-pagination(md-limit="query.limit" md-limit-options="[5, 10, 15]" md-page="query.page" md-total="{{desserts.count}}" md-on-paginate="getDesserts" md-page-select)--></md-content></div></div></div>

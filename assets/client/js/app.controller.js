@@ -2,8 +2,10 @@
 	'use strict';
 
 	angular.module('app')
-	.controller('app-control', ['$rootScope', '$mdDialog', appController]);
+	.controller('app-control', ['SearchMenu', appController]);
 
-	function appController($rootScope, $mdDialog){
+	function appController(SearchMenu){
+		var rvm = this;
+		rvm.SearchMenu = SearchMenu;
 	}
 })();

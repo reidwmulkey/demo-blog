@@ -135,10 +135,10 @@ module.exports.build.extras = function() {
 		gulp.dest('./' + buildFolder + '/assets/client/css')
 	]);
 	
-	gulp.src('./assets/shared/img/**/*')
-	.pipe(gulp.dest('./' + buildFolder + '/assets/shared/img'));
+	gulp.src('./assets/client/img/**/*')
+	.pipe(gulp.dest('./' + buildFolder + '/assets/client/img'));
 
-	gulp.src('./assets/shared/fonts/**/*')
+	gulp.src('./assets/client/fonts/**/*')
 	.pipe(gulp.dest('./' + buildFolder + '/assets/client/fonts'));
 
 	gulp.src('./lib/angular/angular.min.js.map')
@@ -153,5 +153,5 @@ module.exports.build.extras = function() {
 }
 
 module.exports.watch.extras = function(){
-	gulp.watch('./assets/client/sass/*.scss', ['client~extras']);
+	gulp.watch('./assets/client/scss/*.scss', ['client~extras']);
 }

@@ -9,14 +9,14 @@
 		vm.items;
 
 		console.log('loaded index.controller.js');
-		Wooted.getAllWoots()
-		.then(function(items){
-			vm.items = items;
-			console.log(vm.items);
-		})
-		.catch(function(error){
-			vm.items = [];
-			console.log(error);
-		});
+		// Wooted.getAllWoots()
+		// .then(function(items){
+		// 	vm.items = items;
+		// 	console.log(vm.items);
+		// })
+		// .catch(function(error){
+		// 	vm.items = [];
+		// 	console.log(error);
+		// });
 	}
 })();

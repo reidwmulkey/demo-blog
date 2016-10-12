@@ -80,16 +80,9 @@
 	'use strict';
 
 	angular.module('services')
-	.service('sidenavLeft', ['$mdSidenav', '$mdComponentRegistry', '$state', 'Auth', SidenavLeftService]);
+	.service('sidenavLeft', ['$mdSidenav', '$mdComponentRegistry', '$state', SidenavLeftService]);
 
-	function SidenavLeftService($mdSidenav, $mdComponentRegistry, $state, Auth){
-		// var loggedIn = false;
-
-		function isLoggedIn(){
-			var woop = Auth.isLoggedIn();
-			return woop;
-		}
-
+	function SidenavLeftService($mdSidenav, $mdComponentRegistry, $state){
 		function toggle(){
 			if($mdComponentRegistry.get('right') && $mdSidenav('right').isOpen() && !$mdSidenav('left').isOpen()){
 				$mdSidenav('right').close()
@@ -102,79 +95,8 @@
 			}
 		}
 
-		function goToHome(){
-			$state.transitionTo('index');
-		}
-
-		function goToMessages(){
-			$state.transitionTo('message-list');
-		}
-
-		function goToContact(){
-			$state.transitionTo('contact');
-		}
-
-		function goToAbout(){
-			$state.transitionTo('about');
-		}
-
-		function goToDonate(){
-			$state.transitionTo('donate-detail');
-		}
-
-		function goToDedication(){
-			$state.transitionTo('dedication-list');
-		}
-
-		function goToProfile(){
-			$state.transitionTo('user-detail');
-		}
-
-		function goToFeedback(){
-			$state.transitionTo('feedback-submit');
-		}
-
-		function goToEdit(){
-			$state.transitionTo('user-edit');
-		}
-
-		function goToSupportGroups(){
-			$state.transitionTo('support-group-list');
-		}
-
-		function goToUserCreate(){
-			$state.transitionTo('user-create');
-		}
-
-		function goToLogin(){
-			$state.transitionTo('user-login');
-		}
-
-		function logout(){
-			Auth.setToken('');
-			$state.transitionTo('user-login', {
-				transitionMessage: "You have been logged out."
-			});
-		}
-
 		return {
-			// loggedIn: loggedIn,
-			isLoggedIn: isLoggedIn,
-			// setState: setState,
-			toggle: toggle,
-			goToUserCreate: goToUserCreate,
-			goToLogin: goToLogin,
-			goToFeedback: goToFeedback,
-			goToEdit: goToEdit,
-			goToAbout: goToAbout,
-			goToDedication: goToDedication,
-			goToDonate: goToDonate,
-			goToContact: goToContact,
-			goToMessages: goToMessages,
-			goToHome: goToHome,
-			goToProfile: goToProfile,
-			goToSupportGroups: goToSupportGroups,
-			logout: logout
+
 		};
 	}
 })();
@@ -566,9 +488,11 @@ angular.module('app')
 	'use strict';
 
 	angular.module('app')
-	.controller('app-control', ['$rootScope', '$mdDialog', appController]);
+	.controller('app-control', ['SearchMenu', appController]);
 
-	function appController($rootScope, $mdDialog){
+	function appController(SearchMenu){
+		var rvm = this;
+		rvm.SearchMenu = SearchMenu;
 	}
 })();
 (function(){
@@ -582,15 +506,15 @@ angular.module('app')
 		vm.items;
 
 		console.log('loaded index.controller.js');
-		Wooted.getAllWoots()
-		.then(function(items){
-			vm.items = items;
-			console.log(vm.items);
-		})
-		.catch(function(error){
-			vm.items = [];
-			console.log(error);
-		});
+		// Wooted.getAllWoots()
+		// .then(function(items){
+		// 	vm.items = items;
+		// 	console.log(vm.items);
+		// })
+		// .catch(function(error){
+		// 	vm.items = [];
+		// 	console.log(error);
+		// });
 	}
 })();
 (function(){
@@ -623,14 +547,14 @@ angular.module('app')
       is: function () { return true; }
     });
     $mdThemingProvider.theme('default')
-    .primaryPalette('cyan', {
-      'default': '700', // by default use shade 400 from the pink palette for primary intentions
+    .primaryPalette('green', {
+      'default': '800', // by default use shade 400 from the pink palette for primary intentions
       'hue-1': '100', // use shade 100 for the <code>md-hue-1</code> class
       'hue-2': '600', // use shade 600 for the <code>md-hue-2</code> class
       'hue-3': 'A100' // use shade A100 for the <code>md-hue-3</code> class
     })
-    .accentPalette('pink', {
-      'default': '400' // use shade 200 for default, and keep all other shades the same
+    .accentPalette('amber', {
+      'default': '800' // use shade 200 for default, and keep all other shades the same
     })
     // .backgroundPalette('cyan', {
     //   'default': '50'

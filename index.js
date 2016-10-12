@@ -74,6 +74,10 @@ q.all([ready])
 	app.use('/api', api);
 	app.use('/assets', express.static(__dirname + buildFolder + '/assets', {maxAge: oneDay}));
 
+	router.use('/assets/*', function(req, res){
+		res.status(404).send();
+	});
+
 	router.use('/', function(req, res){
 		res.sendFile(__dirname + buildFolder + '/assets/client/index.html');
 	});

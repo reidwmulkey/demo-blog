@@ -2,12 +2,11 @@ mixin toolbar(title, action, icon)
 	md-toolbar(layout='row')&attributes(attributes)
 		//erry body in the toolbar gettin tipsy
 		.md-toolbar-tools
-			md-button.md-icon-button(ng-click="vm.sidenavLeft.toggle()" aria-label="Open/Close main menu")
-				ng-md-icon(icon="menu")
-				//md-icon.icon-white(md-svg-icon="public/shared/img/icons/hamburger.svg")
+			md-button.md-icon-button(ng-click="rvm.SearchMenu.toggle()" aria-label="Open/Close search menu")
+				ng-md-icon(icon="search")
 			h1= title
 			span(flex)
-			md-button.md-icon-button(ng-show="icon" ng-click=action aria-label="Search")
+			//-md-button.md-icon-button(ng-show="icon" ng-click=action aria-label="Search")
 				ng-md-icon(icon=icon)
-			//md-button(class="md-icon-button" ng-click=action aria-label="Open/Close secondary menu")
+			//-md-button(class="md-icon-button" ng-click=action aria-label="Open/Close secondary menu")
 				md-icon.icon-white(md-svg-icon=icon)
