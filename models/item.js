@@ -30,8 +30,13 @@ schema.statics.getById = function(wootId){
 	return this.findOneQ({_id: wootId});
 }
 
-schema.statics.getAll = function(){
-	return this.findQ();
+schema.statics.getAll = function(limit){
+	if(limit){
+		return this.find().limit(limit).execQ();
+
+	}
+	else
+		return this.findQ();
 }
 
 var model = mongoose.model('Woot', schema);

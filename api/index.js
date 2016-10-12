@@ -17,7 +17,7 @@ var router = express.Router();
 var getItems = function(req, res, next){
 	var itemId = req.query.itemId;
 	if(!itemId){
-		itemModel.getAll()
+		itemModel.getAll(100)
 		.then(function(items){
 			res.send(items);
 		}).catch(next);

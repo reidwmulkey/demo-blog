@@ -1,15 +1,28 @@
 var cron = require('node-schedule');
 var mongoose = require('mongoose');
 var express = require('express');
+var _ = require('underscore');
+var nconf = require('nconf');
 var http = require('http');
 var q = require('q');
 
 var config = require('./modules/config');
 var woot = require('./modules/woot');
 
+var router = express.Router();
 var ready = q.defer();
+var oneDay = 86400000;
+var env = nconf.get('NODE_ENV');
+var buildFolder = '/build';
+if(env === "staging")
+	buildFolder += '/staging';
+else if(env === "production")
+	buildFolder += '/prod';
+else
+	buildFolder += '/local';
 
-mongoose.connect('mongodb://127.0.0.1:27017/test', function(err) {
+
+mongoose.connect('mongodb://127.0.0.1:27017/wooted/test', function(err) {
 	if (err) {
 		console.error('Failed to connect to mongo on startup -', err);
 		ready.reject(err);
@@ -34,7 +47,14 @@ q.all([ready])
 
 	//setup a cron to catch the weekly deals (called events)
 	cron.scheduleJob('0 8 * * 2', function(){
-		console.log('weekly job unimplemented.');
+		woot.getWeeksEvents()
+		.then(function(data){
+			woot.storeWoots(_.flatten(data));
+		})
+		.then(function(){
+			console.log(new Date(), " - all event items recorded successfully.");
+		})
+		.catch(console.error);
 	});
 
 	//create the express app
@@ -50,10 +70,19 @@ q.all([ready])
 
 	//set up the routing to api/client
 	var api = require('./api');
-	var client = require('./client');
 
 	app.use('/api', api);
-	app.use('/', client);
+	app.use('/assets', express.static(__dirname + buildFolder + '/assets', {maxAge: oneDay}));
+
+	router.use('/', function(req, res){
+		res.sendFile(__dirname + buildFolder + '/assets/client/index.html');
+	});
+
+	router.use('/*', function(req, res){
+		res.status(404).send();
+	});
+
+	app.use('/', router);
 
 	//error handling
 	app.use(function (err, req, res, next) {
