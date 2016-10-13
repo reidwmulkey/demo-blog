@@ -8,10 +8,9 @@ md-sidenav.md-sidenav-left.md-whiteframe-z2(layout='column' md-component-id='lef
 	md-content
 		.padding-standard
 			md-input-container.md-icon-float.md-block
-				md-icon.icon-black(md-svg-src="assets/shared/img/icons/person.svg")
 				input(tabindex="1" type="text" autocorrect="off" autocapitalize="none" ng-model="vm.itemName" placeholder="Item name")
 
-			md-checkbox(ng-model="vm.searchSpecificSites" aria-label="search specific sites")
+			md-checkbox(ng-disabled="true" ng-model="vm.searchSpecificSites" aria-label="search specific sites")
 				p Search specific sites
 			
 			div(ng-repeat="site in vm.availableSites")
