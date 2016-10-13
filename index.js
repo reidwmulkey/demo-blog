@@ -12,7 +12,9 @@ var woot = require('./modules/woot');
 var router = express.Router();
 var ready = q.defer();
 var oneDay = 86400000;
+nconf.argv().env();
 var env = nconf.get('NODE_ENV');
+console.log('environment: ' + env);
 var buildFolder = '/build';
 if(env === "staging")
 	buildFolder += '/staging';
@@ -21,6 +23,7 @@ else if(env === "production")
 else
 	buildFolder += '/local';
 
+console.log('build folder: ' + buildFolder);
 
 mongoose.connect(config.mongoURL, function(err) {
 	if (err) {

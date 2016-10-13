@@ -37,7 +37,7 @@
 			})
 			.catch(function(error){
 				// console.error(error);
-				$mdToast.show($mdToast.simple().textContent(error.data));
+				$mdToast.show($mdToast.simple().textContent(error.data ? error.data : error));
 			})
 		}
 
@@ -83,7 +83,7 @@
 					$scope.item.averagePrice = roundToDollarAmount(averagePrice / $scope.item.instances.length);
 					console.log($scope.item);
 				}).catch(function(error){
-					$mdToast.show($mdToast.simple().textContent(error.data));
+					$mdToast.show($mdToast.simple().textContent(error.data ? error.data : error));
 				});
 
 				$scope.close = function(){

@@ -1,6 +1,6 @@
 module.exports = {
 	port: 9001,
-	mongoURL: 'mongodb://127.0.0.1:27017/wooted/test',
+	mongoURL: 'mongodb://127.0.0.1:27017/wooted',
 	wootSites: [
 		{ name:'woot', url:'http://www.woot.com' }, 
 		{ name:'electronics', url:'http://electronics.woot.com' },
