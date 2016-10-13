@@ -32,7 +32,7 @@ schema.statics.getById = function(wootId){
 }
 
 schema.statics.getByItemId = function(itemId){
-	return this.findQ({item: itemId});
+	return this.find({item: itemId}).sort( {date: -1 } ).execQ();
 }
 
 schema.statics.getAll = function(){

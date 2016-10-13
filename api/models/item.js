@@ -30,11 +30,21 @@ schema.statics.getById = function(wootId){
 	return this.findOneQ({_id: wootId});
 }
 
-schema.statics.getAll = function(limit){
-	if(limit){
-		return this.find().limit(limit).execQ();
+schema.statics.search = function(itemName){
+	// if(!itemName) return schema.statics.getAll(100);
+	// else {
+		var exp = new RegExp(itemName, 'i');
+		var data = { name: { $regex: exp } };
+		return this.find(data)
+		.limit(100)
+		.execQ();
+	// }
+}
 
-	}
+schema.statics.getAll = function(limit){
+	console.log('no search text, getting all');
+	if(limit)
+		return this.find().limit(limit).execQ();
 	else
 		return this.findQ();
 }

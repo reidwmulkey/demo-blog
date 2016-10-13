@@ -1,8 +1,8 @@
 var ObjectId = require('mongoose').Types.ObjectId;
 var express = require('express');
 
-var itemModel = require('../models/item');
-var instanceModel = require('../models/instance');
+var itemModel = require('./models/item');
+var instanceModel = require('./models/instance');
 
 var app = express();
 var router = express.Router();
@@ -14,7 +14,7 @@ var router = express.Router();
 // 	}).catch(next);
 // }
 
-var getItems = function(req, res, next){
+var getItem = function(req, res, next){
 	var itemId = req.query.itemId;
 	if(!itemId){
 		itemModel.getAll(100)
@@ -28,6 +28,7 @@ var getItems = function(req, res, next){
 		.then(function(item){
 			instanceModel.getByItemId(itemId)
 			.then(function(instances){
+				console.log(instances);
 				var data = item.toObject();
 				data.instances = instances;
 				res.send(data);
@@ -36,8 +37,19 @@ var getItems = function(req, res, next){
 	}
 }
 
+var searchItems = function(req, res, next){
+	var itemName = req.query.itemName;
+	var selectedSites = req.query.selectedSites;
+	itemModel.search(itemName)
+	.then(function(items){
+		// console.log(items);
+		res.send(items);
+	}).catch(next);
+}
+
 // router.get('/items/all', getAllItems);
-router.get('/items', getItems);
+router.get('/items/detail', getItem);
+router.get('/items/search', searchItems);
 
 app.use('/', router);
 

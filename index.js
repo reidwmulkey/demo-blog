@@ -22,7 +22,7 @@ else
 	buildFolder += '/local';
 
 
-mongoose.connect('mongodb://127.0.0.1:27017/wooted/test', function(err) {
+mongoose.connect(config.mongoURL, function(err) {
 	if (err) {
 		console.error('Failed to connect to mongo on startup -', err);
 		ready.reject(err);

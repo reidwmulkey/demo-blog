@@ -5,19 +5,21 @@
 	.service('Wooted', ['$http', '$q', '$state', 'Communication', WootedService]);
 
 	function WootedService($http, $q, $state, Communication){
-		function getAllWoots(){
-			return Communication.get('api/items');
+		function getItem(itemId){
+			return Communication.get('api/items/detail', {
+				itemId: itemId
+			});
 		}
 
 		function search(itemName, selectedSites){
-			return Communication.get('api/items', {
+			return Communication.get('api/items/search', {
 				itemName: itemName,
 				selectedSites: selectedSites
 			})
 		}
 
 		return {
-			getAllWoots: getAllWoots,
+			getItem: getItem,
 			search: search
 		};
 	}

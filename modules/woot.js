@@ -5,8 +5,8 @@ var q = require('q');
 
 var config = require('./config');
 
-var itemModel = require('../models/item'); //an individual item sold on woot.com
-var instanceModel = require('../models/instance'); //an instance of selling the item on woot.com
+var itemModel = require('../api/models/item'); //an individual item sold on woot.com
+var instanceModel = require('../api/models/instance'); //an instance of selling the item on woot.com
 
 module.exports.storeWoots = function(woots){
 	//each woot object has both the item information and instance information.
@@ -16,14 +16,12 @@ module.exports.storeWoots = function(woots){
 	_.each(woots, function(woot){
 		//make sure the item object is there
 		var innerDeferred = q.defer();
-		
-		itemModel.getByName(woot.name)
+
 		itemModel.getByNameOrCreate(woot.name, woot.photo)
 		.then(function(item){
-			// console.log(woot.price);
 			return instanceModel.create({
 				item: item._id,
-				site: woot.site,
+				site: woot.site.name,
 				price: woot.price
 			});
 		})
