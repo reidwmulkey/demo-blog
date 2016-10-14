@@ -74,13 +74,13 @@ module.exports.build.js = function() {
 	var pumpArray = [
 		gulp.src(scripts),
 		concat('app.js'),
-		uglify(),
-		stripDebug(),
+		// uglify(),
+		// stripDebug(),
 		gulp.dest('./' + buildFolder + '/assets/client/js')
 	];
-	if(env !== "production"){
-		pumpArray.splice(2,2);
-	}
+	// if(env !== "production"){
+	// 	pumpArray.splice(2,2);
+	// }
 	pump(pumpArray);
 }
 
