@@ -2,7 +2,7 @@ include ../mixins/toolbar.jade
 
 .full-content(layout="column" ng-cloak flex)
 	+toolbar("wooted")
-	div(layout='row')
+	md-content.full-content(layout='row')
 		div(layout='column')
 			include ../partials/search-menu.jade
 		div(layout='column' flex)
@@ -19,10 +19,14 @@ include ../mixins/toolbar.jade
 					p Is there something you want to buy, but not <span class="secondary">too</span> bad? Have you tried looking around to find the lowest deal?
 
 					p I ran into this issue when I need to buy a new phone. I got $400 nexus 5 from <a class="secondary" href="http://woot.com/">woot.com</a> just $75, but I cracked the screen. I wanted to get an iPhone so I could get an otterbox, but I wasn't sure when iPhone's were last sold on woot, and I didn't know if I'd even save money by waiting for the next sale. 
-				p.padding-standard(ng-show="vm.items.length === 0") No items found.
+				p.padding-standard(ng-show="vm.items.length === 0") 
+					span No items found for the search 
+					span.secondary "{{vm.itemName}}"
+					span .
+				
 				md-list#item-list(ng-show="vm.items.length > 0")
 					md-list-item.md-2-line(ng-click="vm.selectItem(item)" ng-repeat="item in vm.items")
-						img(bind-src="{{item.image}}")
+						img.item-img(bind-src="{{item.image}}")
 						.md-list-item-text
 							p.padding-standard {{item.name}}
 						//<p>Secondary text</p>

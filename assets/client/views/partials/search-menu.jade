@@ -8,14 +8,15 @@ md-sidenav.md-sidenav-left.md-whiteframe-z2(layout='column' md-component-id='lef
 	md-content
 		.padding-standard
 			md-input-container.md-icon-float.md-block
-				input(tabindex="1" type="text" autocorrect="off" autocapitalize="none" ng-model="vm.itemName" placeholder="Item name")
+				input(tabindex="1" type="text" ng-enter="vm.search()" autocorrect="off" autocapitalize="none" ng-model="vm.itemName" placeholder="Item name")
+
+			md-button.md-raised.md-accent(ng-click="vm.search()") Search
+			br
 
 			md-checkbox(ng-disabled="true" ng-model="vm.searchSpecificSites" aria-label="search specific sites")
 				p Search specific sites
 			
-			div(ng-repeat="site in vm.availableSites")
-				md-checkbox(ng-show="vm.searchSpecificSites" value="{{site.name}}" ng-click="vm.selectSite(site)")
+			div(ng-repeat="site in vm.availableSites" ng-show="vm.searchSpecificSites")
+				md-checkbox(value="{{site.name}}" ng-click="vm.selectSite(site)")
 					p {{site.name}}
 				br
-
-			md-button.md-raised.md-accent(ng-click="vm.search()") Search

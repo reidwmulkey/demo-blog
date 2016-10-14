@@ -36,21 +36,22 @@ mongoose.connect(config.mongoURL, function(err) {
 q.all([ready])
 .then(function(){
 	//setup a cron to catch the daily deals
-	woot.getTodaysWoots()
-	.then(woot.storeWoots)
-	.then(function(){
-		console.log(new Date(), " - all woot items recorded successfully.");
-	})
-	.catch(console.error);
-
+	try{
+		woot.getTodaysWoots()
+		.then(woot.storeWoots)
+		.then(function(){
+			console.log(new Date(), " - all woot items recorded successfully.");
+		})
+		.catch(console.error);
+	}catch(e){console.error(e);}
 	//setup a cron to catch the weekly deals (called events)
-	woot.getWeeksEvents()
+	/*woot.getWeeksEvents()
 	.then(function(data){
 		woot.storeWoots(_.flatten(data));
 	})
 	.then(function(){
 		console.log(new Date(), " - all event items recorded successfully.");
 	})
-	.catch(console.error);
+	.catch(console.error);*/
 })
 .catch(console.error);

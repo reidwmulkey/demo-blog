@@ -38,7 +38,7 @@ gulp.task('server', function(){
 	require('./');
 });
 
-gulp.task('client~build', [
+gulp.task('build', [
 	'client~views', 
 	'client~js',
 	'client~lib',

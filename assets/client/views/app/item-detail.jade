@@ -9,7 +9,7 @@ md-dialog(aria-label="Item details")
 	md-dialog-content
 		.padding-standard
 			.center
-				img(src="{{item.image}}")
+				img.item-img(src="{{item.image}}")
 			//img(bind-src="{{item.image}}")			
 			h3.secondary {{item.name}}
 			md-divider
@@ -38,7 +38,10 @@ md-dialog(aria-label="Item details")
 						tr(md-row ng-repeat="instance in item.instances")
 							td(md-cell ng-bind="instance.date | date:'yyyy-MM-dd'") {{instance.date}}
 							td(md-cell) {{instance.price}}
+	
+			md-button.md-primary.md-raised(ng-click="close()") Close			
 
-	md-dialog-actions(layout="row")
+
+	//md-dialog-actions(layout="row")
 		span(flex)
 		md-button.md-primary.md-raised(ng-click="close()") Close			

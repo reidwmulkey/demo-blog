@@ -42,59 +42,62 @@
 		}
 
 		vm.selectItem = function(item){
-			$mdDialog.show({
-				controller: ['$scope', '$mdDialog', 'Wooted', ItemDetailCtrl],
-				templateUrl: '/assets/client/views/app/item-detail.html',
-				parent: angular.element(document.body),
-				clickOutsideToClose:true,
-				fullscreen: false,
-				locals: {
-					item: item
-				}
-			})
-
-			function ItemDetailCtrl($scope, $mdDialog, Wooted){
-				$scope.item = item;
-				console.log($scope.item);
-
-				Wooted.getItem($scope.item._id)
-				.then(function(item){
-					$scope.item = item;
-					if($scope.item.instances.length > 0)
-						$scope.item.lastSold = $scope.item.instances[0].date;
-					var averagePrice = 0;
-					for(var i = 0; i < $scope.item.instances.length; i++){
-						var price = $scope.item.instances[i].price;
-						price = price.split('$').join('');
-						if(price.indexOf('-') !== -1){
-							//price range - take average price of the range and add to average price
-							var priceArray = price.split('-');
-							var p1 = parseFloat(priceArray[1]);
-							var p0 = parseFloat(priceArray[0]);
-							var midRangePrice = ((p1 - p0) / 2) + p0;
-							averagePrice += midRangePrice;
-							console.log(midRangePrice);
-						}
-						else {
-							//just a dollar amount
-							averagePrice += parseFloat(price);
-						}
+			console.log('selecting: ' , item);
+			try{
+				$mdDialog.show({
+					controller: ['$scope', '$mdDialog', 'Wooted', ItemDetailCtrl],
+					templateUrl: '/assets/client/views/app/item-detail.html',
+					parent: angular.element(document.body),
+					clickOutsideToClose:true,
+					fullscreen: false,
+					locals: {
+						item: item
 					}
-					$scope.item.averagePrice = roundToDollarAmount(averagePrice / $scope.item.instances.length);
+				})
+
+				function ItemDetailCtrl($scope, $mdDialog, Wooted){
+					$scope.item = item;
 					console.log($scope.item);
-				}).catch(function(error){
-					$mdToast.show($mdToast.simple().textContent(error.data ? error.data : error));
-				});
 
-				$scope.close = function(){
-					$mdDialog.hide();
-				}
+					Wooted.getItem($scope.item._id)
+					.then(function(item){
+						$scope.item = item;
+						if($scope.item.instances.length > 0)
+							$scope.item.lastSold = $scope.item.instances[0].date;
+						var averagePrice = 0;
+						for(var i = 0; i < $scope.item.instances.length; i++){
+							var price = $scope.item.instances[i].price;
+							price = price.split('$').join('');
+							if(price.indexOf('-') !== -1){
+								//price range - take average price of the range and add to average price
+								var priceArray = price.split('-');
+								var p1 = parseFloat(priceArray[1]);
+								var p0 = parseFloat(priceArray[0]);
+								var midRangePrice = ((p1 - p0) / 2) + p0;
+								averagePrice += midRangePrice;
+								console.log(midRangePrice);
+							}
+							else {
+								//just a dollar amount
+								averagePrice += parseFloat(price);
+							}
+						}
+						$scope.item.averagePrice = roundToDollarAmount(averagePrice / $scope.item.instances.length);
+						console.log($scope.item);
+					}).catch(function(error){
+						$mdToast.show($mdToast.simple().textContent(error.data ? error.data : error));
+					});
 
-				//http://stackoverflow.com/questions/11832914/round-to-at-most-2-decimal-places-in-javascript
-				function roundToDollarAmount(num){
-					return +(Math.round(num + "e+2")  + "e-2");
+					$scope.close = function(){
+						$mdDialog.hide();
+					}
+
+					//http://stackoverflow.com/questions/11832914/round-to-at-most-2-decimal-places-in-javascript
+					function roundToDollarAmount(num){
+						return +(Math.round(num + "e+2")  + "e-2");
+					}
 				}
-			}
+			}catch(e){console.log(e);}
 		}
 
 		console.log('loaded index.controller.js');

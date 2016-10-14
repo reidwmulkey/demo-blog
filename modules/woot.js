@@ -122,6 +122,8 @@ module.exports.loadWoot = function(site){
 				.then(deferred.resolve)
 				.catch(deferred.reject);				
 			}
+			else
+				deferred.resolve();
 		}
 		else{
 			var itemName = $('h2.main-title').text();
@@ -129,7 +131,7 @@ module.exports.loadWoot = function(site){
 			var photo = $('.photo-section img').attr('src');
 
 			var wootObj = {
-				site: site.name,
+				site: site,
 				name: itemName,
 				price: itemPrice,
 				photo: photo

@@ -9,42 +9,20 @@ directive('appVersion', function (version) {
 	};
 })
 
-.directive('mdScrim', function () {
-	return{
-		scope: {
-			scrimText: '@'
-		},
-		restrict: 'E',
-		link: function(scope, element, attrs, controller) {
-			element.css("overflow-x", "hidden");
-			element.css("position", "relative");
-
-			element.append('<md-scrim-img style="background-image: url(/public/shared/img/banner-teal.png); background-size: 100%; background-repeat: no-repeat; padding: 30px;"</md-scrim-img>');
-			element.append('<md-scrim-title>' + scope.scrimText + '</md-scrim-title>');
-			element.append("<md-scrim-overlay style=\"position: absolute;left: 50%;top: 0px;width: 100%;height: 100%;background: -moz-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 30%, rgba(0,0,0,0) 100%); /* FF3.6-15 */ background: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%,rgba(0,0,0,0.5) 30%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */ background: linear-gradient(to bottom, rgba(0,0,0,1) 0%,rgba(0,0,0,0.5) 30%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=0 ); /* IE6-9 */\">" +
-				"<md-scrim-container style='position: relative;left: -50%;height: 100%;width: 100%;'>" + 
-				"<md-scrim-title style='margin: 0px; color: #fff;'>Test</md-scrim-title>" +
-				"</md-scrim-container>" +
-				"</md-scrim-overlay>");
-			console.log(element[0].childNodes);
-			var scrimIndex, titleIndex;
-			for(var i = 0; i < element[0].childNodes.length; i++){
-				if(element[0].childNodes[i].nodeName === 'MD-SCRIM-TITLE')
-					titleIndex = i;
-				else if(element[0].childNodes[i].nodeName === 'MD-SCRIM-OVERLAY')
-					scrimIndex = i;
-			}
-			console.log(titleIndex, scrimIndex);
-			// element[0].childNodes[titleIndex].style.color = "#f00";
-			// element[0].childNodes[1].style.color = "#f00";
-			// attrs.$observe('avatarSrc', function(newValue) {
-			// 	var avatarSrc =  attrs.avatarSrc && attrs.avatarSrc.length > 0 ? attrs.avatarSrc: '/public/shared/img/defaultuser.png';
-			// 	element[0].src = avatarSrc;
-			// });
-			// element.css("border-radius", "50%");
-		}
-	};
+.directive('ngEnter', function() {
+    return function(scope, element, attrs) {
+        element.bind("keydown keypress", function(event) {
+            if(event.which === 13) {
+                scope.$apply(function(){
+                    scope.$eval(attrs.ngEnter, {'event': event});
+                });
+                event.preventDefault();
+            }
+        });
+    };
 })
+
+
 
 .directive('fabHolder', function ($compile) {
 	return{
