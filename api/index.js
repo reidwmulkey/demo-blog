@@ -7,13 +7,6 @@ var instanceModel = require('./models/instance');
 var app = express();
 var router = express.Router();
 
-// var getAllItems = function(req, res, next){
-// 	itemModel.getAll()
-// 	.then(function(items){
-// 		res.send(items);
-// 	}).catch(next);
-// }
-
 var getItem = function(req, res, next){
 	var itemId = req.query.itemId;
 	if(!itemId){
@@ -47,7 +40,6 @@ var searchItems = function(req, res, next){
 	}).catch(next);
 }
 
-// router.get('/items/all', getAllItems);
 router.get('/items/detail', getItem);
 router.get('/items/search', searchItems);
 

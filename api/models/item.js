@@ -49,6 +49,6 @@ schema.statics.getAll = function(limit){
 		return this.findQ();
 }
 
-var model = mongoose.model('Woot', schema);
+var model = mongoose.model('Item', schema);
 
 module.exports = model;
