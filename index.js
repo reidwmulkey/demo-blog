@@ -40,6 +40,7 @@ q.all([ready])
 .then(function(){
 	//setup a cron to catch the daily deals
 	cron.scheduleJob('0 8 * * *', function(){
+		console.log('starting to retrieve the daily items.');
 		woot.getTodaysWoots()
 		.then(woot.storeWoots)
 		.then(function(){
@@ -49,7 +50,8 @@ q.all([ready])
 	});
 
 	//setup a cron to catch the weekly deals (called events)
-	cron.scheduleJob('0 8 * * 2', function(){
+	cron.scheduleJob('0 8 * * 1', function(){
+		console.log('starting to retrieve the weekly items.');
 		woot.getWeeksEvents()
 		.then(function(data){
 			woot.storeWoots(_.flatten(data));
