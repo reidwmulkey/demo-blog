@@ -24,6 +24,7 @@ else
 	buildFolder += '/local';
 
 console.log('build folder: ' + buildFolder);
+mongoose.Promise = q.Promise;
 
 mongoose.connect(config.mongoURL, function(err) {
 	if (err) {

@@ -21,7 +21,7 @@ else if(env === "production")
 else
 	buildFolder += '/local';
 
-
+mongoose.Promise = q.Promise;
 mongoose.connect(config.mongoURL, function(err) {
 	if (err) {
 		console.error('Failed to connect to mongo on startup -', err);
