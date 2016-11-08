@@ -1,0 +1,67 @@
+extends ../layout.jade
+
+block body
+	include ../partials/header.jade
+	include ../partials/jumbotron.jade
+
+	.container
+		.row
+			.col-lg-8.col-lg-offset-2.col-md-10.col-md-offset-1
+				.post-preview
+					img.mw100.100(src="/assets/img/harpoon.jpg")
+					a(href='post.html')
+						h2.post-title Now offering new experimental classes
+					h3.post-subtitle If you thought diving yoga was interesting, wait till we add the harpoons and piranhas...
+					p.post-meta
+						| Posted by 
+						a(href='#') Johny Stretchington
+						|  on October 2, 2014
+				hr
+				.post-preview
+					img.mw100.100(src="/assets/img/dolphin-pose.jpg")
+					a(href='post.html')
+						h2.post-title Getting deeper into dolphin pose
+					h3.post-subtitle When I first started getting into dive yoga, I had the common issues of tight thi...
+					p.post-meta
+						| Posted by 
+						a(href='#') Johny Stretchington
+						|  on September 24, 2014
+				hr
+
+				.post-preview
+					img.mw100.100(src="/assets/img/freezing-water.jpg")
+					a(href='post.html')
+						h2.post-title 10 ways to keep your cool in -20C salt water
+					h3.post-subtitle #3 will shock you!
+					p.post-meta
+						| Posted by 
+						a(href='#') Johny Stretchington
+						|  on September 18, 2014
+				hr
+				.post-preview
+					img.mw100.100(src="/assets/img/white-rock-lake.jpg")
+					a(href='post.html')
+						h2.post-title Location update: White Rock Lake
+					h3.post-subtitle Due to the zebra mussel infestation of White Rock Lake, we will be moving to...
+					p.post-meta
+						| Posted by 
+						a(href='#') Johny Stretchington
+						|  on August 24, 2014
+				hr
+				.post-preview
+					img.mw100.100(src="/assets/img/yoga-guy.jpg")
+					a(href='post.html')
+						h2.post-title Introduction to Dive Yoga
+					h3.post-subtitle This revolutionary form of yoga was first brought to us by Steve Divington in order to...
+					p.post-meta
+						| Posted by 
+						a(href='#') Johny Stretchington
+						|  on July 8, 2014
+				hr
+				// Pager
+				ul.pager
+					li.next
+						a(href='#') Older Posts →
+
+
+	include ../partials/footer.jade

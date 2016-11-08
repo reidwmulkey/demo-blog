@@ -1,0 +1,22 @@
+extends ../layout.jade
+
+block body
+	include ../partials/header.jade
+	include ../partials/jumbotron.jade
+
+	.container
+		.row
+			.col-lg-8.col-lg-offset-2.col-md-10.col-md-offset-1
+				p Interested in receiving the following?
+				ul
+					li class discounts
+					li event reminders
+					li community information
+
+				p Then enter your email and click the button to sign up for our newsletter!
+
+				form(type="submit")
+					input(type="text" placeholder="email")
+					button.button sign up 
+
+	include ../partials/footer.jade

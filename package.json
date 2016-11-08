@@ -1,7 +1,7 @@
 {
-  "name": "wooted",
+  "name": "demo-blog",
   "version": "1.0.0",
-  "description": "Website to collect all historical information of what has been wooted on woot.com",
+  "description": "A demo blog",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,7 +10,6 @@
   "author": "reidwmulkey",
   "license": "MIT",
   "dependencies": {
-    "cheerio": "^0.20.0",
     "del": "^2.2.2",
     "express": "^4.14.0",
     "gulp": "^3.9.1",
@@ -24,11 +23,7 @@
     "helmet": "^2.2.0",
     "jade": "^1.11.0",
     "moment": "^2.14.1",
-    "mongoose": "^4.5.4",
-    "mongoose-id-validator": "^0.3.0",
-    "mongoose-q": "^0.1.0",
     "nconf": "^0.8.4",
-    "node-schedule": "^1.1.1",
     "pump": "^1.0.1",
     "q": "^1.4.1",
     "underscore": "^1.8.3"

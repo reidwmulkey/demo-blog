@@ -1,12 +1,12 @@
 {
-  "name": "wooted",
-  "description": "Website to collect all historical information of what has been wooted on woot.com",
+  "name": "demo-blog",
+  "description": "A demo-blog site",
   "main": "index.js",
   "authors": [
     "reidwmulkey"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/reidwmulkey/wooted",
+  "homepage": "https://github.com/reidwmulkey/demo-blog",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -15,12 +15,8 @@
     "tests"
   ],
   "dependencies": {
-    "angular-seo": "*",
-    "angular-truncate": "*",
-    "angular-ui-router": "^0.3.1",
-    "angular": "^1.5.8",
-    "md-data-table": "^1.8.0",
-    "angular-material-data-table": "^0.10.9",
-    "angular-material-icons": "^0.7.1"
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.1.1"
   }
 }
