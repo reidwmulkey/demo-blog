@@ -1,0 +1,54 @@
+extends ../layout.jade
+
+block body
+	include ../partials/header.jade
+	include ../partials/jumbotron.jade
+
+	.container
+		.row
+			.col-lg-8.col-lg-offset-2.col-md-10.col-md-offset-1
+				p Access all of our articles over the years.
+				br
+
+				.row
+					.col-xs-4 Date
+					.col-xs-4 Name
+					.col-xs-4 Author
+				hr.no-padding
+
+				.row
+					.col-xs-4 2014-10-02
+					.col-xs-4 
+						a(href='/') Now offering new experimental classes
+					.col-xs-4 Johny Stretchington
+				hr
+
+				.row
+					.col-xs-4 2014-09-24
+					.col-xs-4 
+						a(href='/') Getting deeper into dolphin pose
+					.col-xs-4 Johny Stretchington
+				hr
+
+				.row
+					.col-xs-4 2014-09-18
+					.col-xs-4 
+						a(href='/') 10 ways to keep your cool in -20C salt water
+					.col-xs-4 Johny Stretchington
+				hr
+
+				.row
+					.col-xs-4 2014-08-24
+					.col-xs-4 
+						a(href='/') Location update: White Rock Lake
+					.col-xs-4 Johny Stretchington
+				hr
+
+				.row
+					.col-xs-4 2014-07-08
+					.col-xs-4 
+						a(href='/') Introduction to Dive Yoga
+					.col-xs-4 Johny Stretchington
+				hr
+
+	include ../partials/footer.jade

@@ -47,7 +47,8 @@ module.exports.watch.views = function() {
 
 module.exports.build.js = function() {
 	var scripts = [
-		'./assets/js/clean-blog.js'
+		'./assets/js/clean-blog.js',
+		'./assets/js/main.js'
 	];
 	
 	console.log(nconf.get('NODE_ENV'));

@@ -15,8 +15,10 @@ img.logo {
 }
 
 hr {
-	padding-bottom:40px;
 	border-top: 2px solid $primary !important;
+	.hr-padding {
+		padding-bottom:40px;
+	}
 }
 
 .primary {

@@ -15,8 +15,9 @@ block body
 
 				p Then enter your email and click the button to sign up for our newsletter!
 
-				form(type="submit")
-					input(type="text" placeholder="email")
-					button.button sign up 
+				form#newsletterForm
+					input#email(type="text" placeholder="email")
+					br
+					button(type="submit") sign up 
 
 	include ../partials/footer.jade

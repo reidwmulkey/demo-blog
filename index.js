@@ -35,14 +35,24 @@ router.use('/assets/*', function(req, res){
 	res.status(404).send();
 });
 
-//if they just arrive at bear-fight-betting.com, give them index.html
-router.use('/', function(req, res){
-	res.sendFile(__dirname + buildFolder + '/assets/views/app/index.html');
+router.use('/about', function(req, res){
+	res.sendFile(__dirname + buildFolder + '/assets/views/app/about.html');
+});
+
+router.use('/archive', function(req, res){
+	res.sendFile(__dirname + buildFolder + '/assets/views/app/archive.html');
+});
+
+router.use('/popular', function(req, res){
+	res.sendFile(__dirname + buildFolder + '/assets/views/app/popular.html');
 });
 
 router.use('/newsletter', function(req, res){
-	console.log('hit newsletter??');
 	res.sendFile(__dirname + buildFolder + '/assets/views/app/newsletter.html');
+});
+
+router.use('/', function(req, res){
+	res.sendFile(__dirname + buildFolder + '/assets/views/app/index.html');
 });
 
 router.use('/*', function(req, res){
