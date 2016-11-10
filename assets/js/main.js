@@ -9,11 +9,4 @@ $(document).ready(function(){
 		else
 			alert(email.val() + " has been added to our newsletter!");
 	});
-
-	$('#popularTabs a').click(function(event){
-		event.preventDefault();
-		// $('#myTabs a:first').tab('show');
-		$('#mostCommented').tab('show');
-
-	});
 });
